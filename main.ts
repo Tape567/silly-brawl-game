@@ -834,7 +834,6 @@ function death () {
     miniMenu.createMenuItem("Share this score with friends! ")
     )
     miniMenu.setDimensions(GameOverMenu, 140, 100)
-    easing.blockEaseTo(GameOverMenu, 80, 60, 0, easing.Mode.InCubic)
     miniMenu.setMenuStyleProperty(GameOverMenu, miniMenu.MenuStyleProperty.Rows, 5)
     miniMenu.setMenuStyleProperty(GameOverMenu, miniMenu.MenuStyleProperty.Columns, 1)
     miniMenu.setTitle(GameOverMenu, "YEOWCH! Game Over!")
@@ -845,6 +844,8 @@ function death () {
     miniMenu.setMenuStyleProperty(GameOverMenu, miniMenu.MenuStyleProperty.ScrollIndicatorColor, 0)
     GameOverMenu.z = 999
     GameOverMenu.setFlag(SpriteFlag.RelativeToCamera, true)
+    GameOverMenu.setPosition(80, 1)
+    easing.blockEaseTo(GameOverMenu, 80, 60, 0, easing.Mode.InCubic)
     timer.background(function () {
         music.play(music.createSong(hex`00f5000408010300001c00010a006400f40164000004000000000000000000000000000500000412000c001000011214001800011118001c00011107001c00020a006400f401640000040000000000000000000000000000000003120001000200012404000500012209000a00011e09010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c800240000000100010302000300010205000600010306000700010a09000a0001080c000d000114`), music.PlaybackMode.UntilDone)
         SAM.speakWithPreset("Game Over", SAM.VoicePreset.SAM)
@@ -1651,6 +1652,8 @@ function GamemodeSelect () {
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 `)
+        } else if (selection == "More") {
+        	
         } else {
             timer.throttle("dont break things pls", 500, function () {
                 if (selection == "Waves") {
@@ -1783,9 +1786,6 @@ function Enemycatalog () {
     miniMenu.setStyleProperty(Enemycatalogmenu, miniMenu.StyleKind.Default, miniMenu.StyleProperty.Background, 15)
     miniMenu.setStyleProperty(Enemycatalogmenu, miniMenu.StyleKind.Default, miniMenu.StyleProperty.Foreground, 2)
     miniMenu.setStyleProperty(Enemycatalogmenu, miniMenu.StyleKind.Selected, miniMenu.StyleProperty.Background, 2)
-    if (blockSettings.readString("Visited") == "Visited") {
-        miniMenu.removeMenuItem(Enemycatalogmenu, 6)
-    }
     miniMenu.setStyleProperty(Enemycatalogmenu, miniMenu.StyleKind.Selected, miniMenu.StyleProperty.Foreground, 1)
     Enemycatalogmenu.setPosition(80, 50)
     game.setDialogFrame(img`
@@ -1827,42 +1827,47 @@ function Enemycatalog () {
             game.showLongText("Let's be honest-this guy is REALLY poopy.", DialogLayout.Center)
             game.showLongText("Poopy just stays in one spot and just chills there, shooting projectiles at you. Yes, you can damage him, but can that really stop him anyways?", DialogLayout.Center)
         } else if (selection == "[ERROR]") {
-            game.showLongText("Ruh-Oh! Sorry, looks like we can't load the enemy info right now. ", DialogLayout.Center)
-            game.showLongText("Please try again!", DialogLayout.Center)
-            game.showLongText("Error code: [REDACTED]", DialogLayout.Center)
-            game.showLongText("", DialogLayout.Center)
-            game.showLongText("", DialogLayout.Center)
-            game.showLongText("What ar3 Y0U doing h3re?", DialogLayout.Center)
-            game.showLongText("Y0u cAn'T Be H3r3", DialogLayout.Center)
-            music.stopAllSounds()
-            game.showLongText("Y0u cAn'T Be H3r3", DialogLayout.Center)
-            sprites.destroy(Enemycatalogmenu, effects.warmRadial, 500)
-            game.showLongText("N0w...", DialogLayout.Center)
-            game.showLongText("L3AV3 ", DialogLayout.Center)
-            game.showLongText("0r 3l2e...", DialogLayout.Center)
-            game.showLongText("", DialogLayout.Center)
-            game.showLongText("", DialogLayout.Center)
-            game.showLongText("", DialogLayout.Center)
-            game.showLongText("", DialogLayout.Center)
-            game.showLongText("Y0u jUsT d0Nt kn0w WHen T0 quIt", DialogLayout.Center)
-            game.showLongText("do YOU?", DialogLayout.Center)
-            game.showLongText("...", DialogLayout.Center)
-            color.startFadeFromCurrent(color.GrayScale)
-            game.showLongText("LeAvE... BeFoRe YoUr TiMe rUns OUT", DialogLayout.Center)
-            SAM.speakWithPreset("Your time is running now.", SAM.VoicePreset.SAM)
-            pause(10000)
-            game.showLongText("AlRiGhT...", DialogLayout.Center)
-            game.showLongText("TiM3", DialogLayout.Center)
-            game.showLongText("T0", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            game.showLongText("D13", DialogLayout.Center)
-            YOURFATEWILLBEDECIDED()
+            if (blockSettings.readString("Visited") == "Visited") {
+                miniMenu.removeMenuItem(Enemycatalogmenu, 5)
+            } else {
+                blockSettings.writeString("Visited", "Visited")
+                game.showLongText("Ruh-Oh! Sorry, looks like we can't load the enemy info right now. ", DialogLayout.Center)
+                game.showLongText("Please try again!", DialogLayout.Center)
+                game.showLongText("Error code: [REDACTED]", DialogLayout.Center)
+                game.showLongText("", DialogLayout.Center)
+                game.showLongText("", DialogLayout.Center)
+                game.showLongText("What ar3 Y0U doing h3re?", DialogLayout.Center)
+                game.showLongText("Y0u cAn'T Be H3r3", DialogLayout.Center)
+                music.stopAllSounds()
+                game.showLongText("Y0u cAn'T Be H3r3", DialogLayout.Center)
+                sprites.destroy(Enemycatalogmenu, effects.warmRadial, 500)
+                game.showLongText("N0w...", DialogLayout.Center)
+                game.showLongText("L3AV3 ", DialogLayout.Center)
+                game.showLongText("0r 3l2e...", DialogLayout.Center)
+                game.showLongText("", DialogLayout.Center)
+                game.showLongText("", DialogLayout.Center)
+                game.showLongText("", DialogLayout.Center)
+                game.showLongText("", DialogLayout.Center)
+                game.showLongText("Y0u jUsT d0Nt kn0w WHen T0 quIt", DialogLayout.Center)
+                game.showLongText("do YOU?", DialogLayout.Center)
+                game.showLongText("...", DialogLayout.Center)
+                color.startFadeFromCurrent(color.GrayScale)
+                game.showLongText("LeAvE... BeFoRe YoUr TiMe rUns OUT", DialogLayout.Center)
+                SAM.speakWithPreset("Your time is running now.", SAM.VoicePreset.SAM)
+                pause(10000)
+                game.showLongText("AlRiGhT...", DialogLayout.Center)
+                game.showLongText("TiM3", DialogLayout.Center)
+                game.showLongText("T0", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                game.showLongText("D13", DialogLayout.Center)
+                YOURFATEWILLBEDECIDED()
+            }
         } else {
         	
         }

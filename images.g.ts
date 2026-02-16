@@ -1519,5 +1519,12 @@ f f 8 8 8 8 8 8 5 5 5 5 5 5 f f
         return null;
     })
 
+    helpers._registerFactory("json", function(name: string) {
+        switch(helpers.stringTrim(name)) {
+
+        }
+        return null;
+    })
+
 }
 // Auto-generated code. Do not edit.
