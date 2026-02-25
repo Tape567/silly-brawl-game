@@ -468,6 +468,9 @@ statusbars.onDisplayUpdated(StatusBarKind.Ammo, function (status, image2) {
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Obelisk, function (sprite, otherSprite) {
     spriteutils.setVelocityAtAngle(sprite, spriteutils.angleFrom(sprite, otherSprite), 0 - 250)
     timer.throttle("DamageObelisk", 100, function () {
+        timer.background(function () {
+            music.play(music.createSoundEffect(WaveShape.Noise, 5000, 1530, 198, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
+        })
         ObeliskHealthBar.value += 0 - sprites.readDataNumber(sprite, "Damage")
         scene.cameraShake(6, 400)
     })
@@ -860,6 +863,14 @@ function death () {
             game.reset()
         })
     })
+}
+function Acheivements (Title: string, Descrption: string, Icon: Image) {
+    Achievements.showAchievement(
+    Title,
+    Descrption,
+    1,
+    Icon
+    )
 }
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (!(_1Gamemode == 3)) {
@@ -2076,6 +2087,8 @@ function Prepare () {
     fancyText.animateAtSpeed(myTextSprite, fancyText.TextSpeed.Normal, fancyText.AnimationPlayMode.InBackground)
     myTextSprite.setPosition(80, 87)
     fancyText.setColor(myTextSprite, 8)
+    Demotxt = fancyText.create("Demo Release")
+    Demotxt.setPosition(65, 106)
     animation.runMovementAnimation(
     myTextSprite,
     animation.animationPresets(animation.bobbing),
@@ -2639,6 +2652,7 @@ let SelectionMenuConfirmation: Sprite = null
 let Bullet: Sprite = null
 let SuperReloadArray: number[] = []
 let AmmoReloadArray: number[] = []
+let Demotxt: fancyText.TextSprite = null
 let myTextSprite: fancyText.TextSprite = null
 let Title: Sprite = null
 let _3Cursor: Sprite = null

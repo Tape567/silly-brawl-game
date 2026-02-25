@@ -23,7 +23,10 @@
         "sam-tts": "github:Monk070/makecode-sam-speech#cd94131300b14ec0d0c625e91f668f5e51e49457",
         "arcade-fancy-text": "github:riknoll/arcade-fancy-text#v0.2.1",
         "pxt-javascript-extras": "github:WoofWoofCodes/pxt-javascript-extras#v0.4.0",
-        "character-animations": "github:riknoll/character-animations#v0.3.2"
+        "character-animations": "github:riknoll/character-animations#v0.3.2",
+        "Achievements": "github:UnsignedArduino/Achievements#a578c77dd75467b9b0b5238a9a31c5fdc427cb9d",
+        "arcade-fire-sprites": "github:riknoll/arcade-fire-sprites#v0.0.4",
+        "arcade-improved-sprite-data": "github:riknoll/arcade-improved-sprite-data#2e82c060f5d29b7ae556e11a29aa2f25a26a6115"
     },
     "files": [
         "main.blocks",
